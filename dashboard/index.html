@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Launch Radar — token-radar-01</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <h1>Token Launch Radar</h1>
+    <p class="tagline">token-radar-01 &nbsp;·&nbsp; pre-token protocols only &nbsp;·&nbsp; snapshot <span id="snapDate">—</span></p>
+  </div>
+</header>
+<main class="wrap">
+  <p class="intro">Every protocol below records no token yet. Each is ranked by the implied value of a token it has not issued — TVL times the median market-cap/TVL multiple of the tokenized protocols in its own category, adjusted for seven-day momentum and for how long it has run with no token. Protocols whose token already trades are listed at the bottom as reference only, and are never ranked.</p>
+
+  <section class="kpis" id="kpis" aria-label="Board facts"></section>
+
+  <section class="controls">
+    <input id="search" type="search" placeholder="Search protocols..." aria-label="Search protocols">
+    <select id="category" aria-label="Filter by category"><option value="">All categories</option></select>
+    <select id="sort" aria-label="Sort board">
+      <option value="implied">Sort: implied value</option>
+      <option value="tvl">Sort: TVL</option>
+      <option value="chg">Sort: 7-day change</option>
+      <option value="odds">Sort: launch odds</option>
+      <option value="name">Sort: name A–Z</option>
+    </select>
+    <label class="check"><input id="watchOnly" type="checkbox"> Watchlist only</label>
+  </section>
+
+  <section class="card">
+    <table id="board">
+      <thead>
+        <tr><th>#</th><th>Protocol</th><th>Category</th><th>TVL</th><th>7d</th><th>Implied value</th><th>Value range</th><th>Launch odds</th></tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="count" id="count"></p>
+  </section>
+
+  <section class="card detail" id="detail" hidden>
+    <h2 id="dName"></h2>
+    <p class="dsub" id="dSub"></p>
+    <div class="dgrid">
+      <div><span class="k">Implied value</span><strong id="dValue"></strong></div>
+      <div><span class="k">Value range</span><strong id="dRange"></strong></div>
+      <div><span class="k">TVL</span><strong id="dTvl"></strong></div>
+      <div><span class="k">7-day change</span><strong id="dChg"></strong></div>
+      <div><span class="k">Category multiple</span><strong id="dMult"></strong></div>
+      <div><span class="k">Launch odds</span><strong id="dOdds"></strong></div>
+    </div>
+    <p class="model" id="dModel"></p>
+    <h3>Farm plan — every step states its cost and its time</h3>
+    <ol id="dSteps"></ol>
+  </section>
+
+  <section class="card validation" id="validation">
+    <h2>How good is the model? Held-out validation</h2>
+    <p id="vText"></p>
+    <p class="fine">Leave-one-out: each tokenized protocol's market cap is predicted from its TVL times the median multiple of its category, with the protocol itself excluded. A multiple model is a rough yardstick, not a precise predictor — that is why every row carries a wide uncertainty interval instead of a single confident number.</p>
+  </section>
+
+  <section class="card reference">
+    <h2>Already has a token — reference only, never ranked</h2>
+    <p>These protocols record a token that already trades, so they are not launches. They are shown because their market caps calibrate the multiples above — nothing more.</p>
+    <ul id="refList"></ul>
+  </section>
+
+  <p class="fine">Source: DefiLlama snapshot <span id="snapDate2">—</span>. Implied values are this radar's own claim, never a promise that a token will be issued or what it would trade at.</p>
+</main>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
